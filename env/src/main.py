@@ -1,6 +1,7 @@
 from picamera import PiCamera
 from datetime import datetime, timedelta
 from orbit import satellite
+import csv
 
 def capture(camera, image):
     iss = satellite(25544)
@@ -17,3 +18,8 @@ def capture(camera, image):
 
     camera.capture(image)
 
+def create_csv_file(data_file):
+    with open(data_file, 'w') as f:
+        writer = csv.writer(f)
+        header = ('ImageNumber', 'DataTime', 'Latitide', 'Longitude', 'NDVI')
+        writer.writerow(header)
